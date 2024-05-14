@@ -21,9 +21,9 @@ public class Connexion extends javax.swing.JFrame {
     private void Connexion1() {
         try {
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:dbjavaproject.db");
-            System.out.println("Connexion réussite");
-        } catch(Exception e){
+            con = DriverManager.getConnection("jdbc:sqlite:animalerieDB.db");
+            System.out.println("Connection etablie!");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -60,21 +60,17 @@ public class Connexion extends javax.swing.JFrame {
         Right.setBackground(new java.awt.Color(255, 255, 255));
         Right.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionanimalerie1/dogcat.jpg"))); // NOI18N
 
         javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
         Right.setLayout(RightLayout);
         RightLayout.setHorizontalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RightLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         RightLayout.setVerticalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RightLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(Right);
@@ -225,7 +221,7 @@ try {
     else {
             Connexion1 con = new Connexion1();
             String sql ="insert into connexion (email, motdepasse) values(?, ?)";
-        pst=con.con.prepareStatement("select * from inscription where email=? and motdepasse=?");
+        pst=con.con.prepareStatement("select * from inscription  where email=? and motdepasse=?");
         pst.setString(1, txtemail.getText());
         pst.setString(2, txtmotdepasse.getText());
         rs=pst.executeQuery();
@@ -243,10 +239,11 @@ try {
         int rowsAffected = pst.executeUpdate();
         if (rowsAffected > 0) {
             JOptionPane.showMessageDialog(this, "Connexion réussie");
-                Connexion.super.dispose();
+               // Connexion.super.dispose();
                 JOptionPane.showMessageDialog(this, "Access");
                     dashboard dash = new dashboard();
                     dash.setVisible(true);
+                    dispose();
                 
             }else {
              JOptionPane.showMessageDialog(this, "Erreur lors de la connexion");

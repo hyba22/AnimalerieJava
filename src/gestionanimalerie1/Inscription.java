@@ -24,11 +24,11 @@ public class Inscription extends javax.swing.JFrame {
         initComponents();
     }
     private void Inscrit() {
-        try {
+       try {
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:dbjavaproject.db");
-            System.out.println("Inscription réussite");
-        } catch(Exception e){
+            con = DriverManager.getConnection("jdbc:sqlite:animalerieDB.db");
+            System.out.println("Connection etablie!");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -162,18 +162,20 @@ public class Inscription extends javax.swing.JFrame {
 
         Right.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionanimalerie1/dogcat.jpg"))); // NOI18N
 
         javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
         Right.setLayout(RightLayout);
         RightLayout.setHorizontalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(RightLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         RightLayout.setVerticalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RightLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -210,6 +212,7 @@ public class Inscription extends javax.swing.JFrame {
             pst.setString(3, txtemail.getText());
             pst.setString(4, txtmotdepasse.getText());
             pst.executeUpdate();
+
             pst.close();
             con.close();
             JOptionPane.showMessageDialog(null, "Inscription réussite");

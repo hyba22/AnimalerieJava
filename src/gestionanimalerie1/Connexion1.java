@@ -16,12 +16,13 @@ import javax.swing.JOptionPane;
 public class Connexion1 {
     Connection con;
     public Connexion1() {
-    try {
-         Class.forName("org.sqlite.JDBC");
-         con=DriverManager.getConnection("jdbc:sqlite:dbjavaproject.db");
-         //JOptionPane.showMessageDialog(null, "Connexion établie");
-     }catch(Exception e){
-         //JOptionPane.showMessageDialog(null,"Echec de connexion" +e);
-     }
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:animalerieDB.db");
+            System.out.println("Connection etablie!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
 }
-}
+
